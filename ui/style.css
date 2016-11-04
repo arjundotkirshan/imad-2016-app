@@ -24,7 +24,7 @@ body {
     height: 200px;
 }
 .container{
-     max-width:400px;
+     max-width:800px;
      margin:0 auto;
      color:#6a6a6a;
      font-family:sans-serif;
@@ -36,5 +36,5 @@ body {
       border-radius:15px;
      -webkit-box-shadow: 10px 10px 5px 0px rgba(0,0,0,0.75);
     -moz-box-shadow: 10px 10px 5px 0px rgba(0,0,0,0.75);
-    box-shadow: 10px 10px 5px 0px rgba(0,0,0,0.75);
+    box-shadow: 10px 10px 5px 5px rgba(0,0,0,0.75);
 } 
