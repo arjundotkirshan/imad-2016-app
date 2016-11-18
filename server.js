@@ -4,6 +4,20 @@ var path = require('path');
 
 var app = express();
 app.use(morgan('combined'));
+
+var articleOne={
+    title:'Article One I PK',
+    heading:'Article One',
+    date:'Sep 28,2016',
+    content:
+    `
+    
+                <p>Once upon a time there was a king.Once upon a time there was a king.Once upon a time there was a king.Once upon a time there was a king.Once upon a time there was a king.Once upon a time there was a king.</p>
+                <p>Once upon a time there was a king.Once upon a time there was a king.Once upon a time there was a king.Once upon a time there was a king.Once upon a time there was a king.Once upon a time there was a king.</p>
+                <p>Once upon a time there was a king.Once upon a time there was a king.Once upon a time there was a king.Once upon a time there was a king.Once upon a time there was a king.Once upon a time there was a king.</p>
+  `
+}
+
 var Pool = require('pg').Pool;
 
 var config={
