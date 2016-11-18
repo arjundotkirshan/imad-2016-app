@@ -16,7 +16,7 @@ var articleOne={
                 <p>Once upon a time there was a king.Once upon a time there was a king.Once upon a time there was a king.Once upon a time there was a king.Once upon a time there was a king.Once upon a time there was a king.</p>
                 <p>Once upon a time there was a king.Once upon a time there was a king.Once upon a time there was a king.Once upon a time there was a king.Once upon a time there was a king.Once upon a time there was a king.</p>
   `
-}
+};
 
 var Pool = require('pg').Pool;
 
