@@ -15,27 +15,7 @@ var articles={
          <p>Once upon a time there was a king..</p>`
                 
 }
-/*'article-two':{
-    title:'Article Two I PK',
-    heading:'Article Two',
-    date:'Sep 28,2016',
-    content:
-    `
-    
-                <p>Once upon a time there was a king.</p>`
-                
-},
-'article-three':{
-    title:'Article Three I PK',
-    heading:'Article Three',
-    date:'Sep 28,2016',
-    content:
-    `
-    
-                <p>Once upon a time there was a king..</p>
-               
-  `
-}*/
+
 };
 
 function createTemplate (data){
