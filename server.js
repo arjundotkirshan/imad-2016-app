@@ -12,7 +12,27 @@ var articles={
         date:'Sep 28,2016',
         content:
         `
-             <p>Once upon a time there was a king..</p>
+             <p>This is article-one</p>
+        `
+                    
+    },
+    'article-two':{
+        title:'Article Two | PK',
+        heading:'Article Two',
+        date:'Sep 28,2016',
+        content:
+        `
+             <p>This is article-two</p>
+        `
+                    
+    },
+    'article-three':{
+        title:'Article Three | PK',
+        heading:'Article Three',
+        date:'Sep 28,2016',
+        content:
+        `
+             <p>This is article-Three</p>
         `
                     
     }
