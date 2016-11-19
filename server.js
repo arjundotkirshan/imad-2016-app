@@ -26,8 +26,6 @@ var articles={
                 <p>Once upon a time there was a king.</p>`
                 
 },
-
-
 'article-three':{
     title:'Article Three I PK',
     heading:'Article Three',
@@ -39,7 +37,6 @@ var articles={
                
   `
 }
-
 };
 
 function createTemplate (data){
@@ -107,7 +104,7 @@ app.get('/', function (req, res) {
 
 app.get('/:articleName', function (req, res){
     var articleName=req.params.articleName;
-    res.send(createTemplate(articles[articles]));
+    res.send(createTemplate(articles[article]));
 });
 
 
