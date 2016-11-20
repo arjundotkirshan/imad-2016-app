@@ -1,50 +1,24 @@
 var express = require('express');
 var morgan = require('morgan');
 var path = require('path');
+var Pool = require('pg').Pool;
+var crypto=require('crypto');
+var config={
+    user:'arjundotkirshan',
+    database:'arjundotkirshan',
+    host:'db.imad.hasura-app.io',
+    port:'5432',
+    password:process.env.DB_PASSWORD
+};
 
 var app = express();
 app.use(morgan('combined'));
-
-var articles={
-    'article-one':{
-        title:'Article One | PK',
-        heading:'Article One',
-        date:'Sep 28,2016',
-        content:
-        `
-             <p>This is article-one</p>
-        `
-                    
-    },
-    'article-two':{
-        title:'Article Two | PK',
-        heading:'Article Two',
-        date:'Sep 28,2016',
-        content:
-        `
-             <p>This is article-two</p>
-        `
-                    
-    },
-    'article-three':{
-        title:'Article Three | PK',
-        heading:'Article Three',
-        date:'Sep 28,2016',
-        content:
-        `
-             <p>This is article-Three</p>
-        `
-                    
-    }
-
-};
 
 function createTemplate (data){
     var title = data.title;
     var date = data.date;
     var heading = data.heading;
     var content = data.content;
-
 
         var htmlTemplate=`
             <html>
@@ -76,16 +50,20 @@ function createTemplate (data){
         `;
 return htmlTemplate;
 }
+app.get('/', function (req, res) {
+  res.sendFile(path.join(__dirname, 'ui', 'index.html'));
+});
 
-var Pool = require('pg').Pool;
+function hash(input, salt){
+    var hashed=crypto.pbkdf25sync(input, slat, 10000, 512, 'sha512');
+    return hashed.toString('hex');
+}
+app.get('/hash/:input', function(req, res){
+    var hashedString=hash(req.params.input, 'this-is-some-random-string');
+    res.send(hashedString);
+});
 
-var config={
-    user:'arjundotkirshan',
-    database:'arjundotkirshan',
-    host:'db.imad.hasura-app.io',
-    port:'5432',
-    password:process.env.DB_PASSWORD
-};
+
 
 var pool=new Pool(config);
 app.get('/test-db', function (req, res){
@@ -98,9 +76,7 @@ app.get('/test-db', function (req, res){
     });
 });
 
-app.get('/', function (req, res) {
-  res.sendFile(path.join(__dirname, 'ui', 'index.html'));
-});
+
 
 app.get('/articles/:articleName', function (req, res){
    pool.query("SELECT * FROM article WHERE title='"+req.params.articleName+"'", function(err, result){
