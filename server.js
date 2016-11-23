@@ -17,7 +17,7 @@ app.use(session({
 
 //database connection is defined here
 var config={
-    user:'arjundotkirshan',
+    user:process.env.IMADUSER || 'arjundotkirshan',
     database:'arjundotkirshan',
     host:'db.imad.hasura-app.io',
     port:'5432',
