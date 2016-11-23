@@ -44,31 +44,57 @@ function createTemplate (data){
     var content = data.content;
 
         var htmlTemplate=`
-            <html>
-            <head>
-                <title>
-                   ${title}
-                </title>
-                <meta name="viewport" content="width=device-width, initial-scale=1" />
-                <link href="/ui/style.css" rel="stylesheet" />
-            </head>
+           <!DOCTYPE html>
+        <html lang="en">
+        <head>
+            <meta charset="utf-8">
+            <meta http-equiv="X-UA-Compatible" content="IE=edge">
+            <meta name="viewport" content="width=device-width, initial-scale=1">
+            <title>Nodejs WebApp Development</title>
+            <link href="css/bootstrap.min.css" rel="stylesheet">
+            <link href="css/clean-blog.min.css" rel="stylesheet">
+            <link href="css/font-awesome.min.css" rel="stylesheet" type="text/css">
+            <link href='//fonts.googleapis.com/css?family=Lora:400,700,400italic,700italic' rel='stylesheet' type='text/css'>
+            <link href='//fonts.googleapis.com/css?family=Open+Sans:300italic,400italic,600italic,700italic,800italic,400,300,600,700,800' rel='stylesheet' type='text/css'>
+            <link href="css/modal.css" rel="stylesheet">
+            <link href="css/post-comment.css" rel="stylesheet">
+        </head>
             <body>
-                <div class="container">
-                    <div>
-                        <a href="/">Home</a>
+    `;
+    for (var i = 0; i < comments.length; i++) {
+                if (comments[i].comment_author === username){ 
+                  htmlTemplate = htmlTemplate +  `
+                   <div class="col-sm-8 col-sm-offset-2">
+                        <div class="panel panel-white post panel-shadow">
+                            <div class="post-heading">
+                                <div class="pull-left image">
+                                    <a href=/user/`+comments[i].comment_author+`><img src="http://bootdey.com/img/Content/user_`+findUser(comments[i].comment_author).displaypic+`.jpg" class="img-circle avatar" alt="user profile image"></a>
+                                </div>
+                                <div class="pull-left meta">
+                                    <div class="title h5">
+                                        <a href=/user/`+comments[i].comment_author+`><b>`+comments[i].comment_author+`</b></a> made a comment.
+                                    </div>
+                                    <h6 class="text-muted time">`+(comments[i].comment_date).toGMTString()+`</h6>
+                                </div>
+                            </div> 
+                            <div class="post-description"> 
+                                <p>`+comments[i].comment_content+`</p>
+                            </div>
+                        </div>
                     </div>
-                    <hr/>
-                    <div>
-                        <h3>${heading}</h3>
-                    </div>
-                    <div>
-                        ${date.toString()}
-                    </div>
-                    <div>
-                        ${content}
-                    </div>
-                </div>
-            </body>
+                            
+                       ` ;
+                   }
+               }
+
+       htmlTemplate = htmlTemplate + `
+</body>
+       	            <script src="js/jquery.min.js"></script>
+            <script src="js/bootstrap.min.js"></script>
+            <script src="js/clean-blog.min.js"></script>
+            <script src="js/main.js"></script>
+            <script src="js./article.js"></script>
+        </body>
         </html>
         `;
 return htmlTemplate;
