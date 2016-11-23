@@ -34,7 +34,7 @@ var pool = new Pool(config);
 get_posts();
 get_comments();
 get_users();
-*/
+ commented for a while as it is creating app crash*/
 
 
 function createTemplate (data){
@@ -169,16 +169,45 @@ app.get('/articles/:articleName', function (req, res){
 });
 
 
-app.get('/ui/style.css', function (req, res) {
-  res.sendFile(path.join(__dirname, 'ui', 'style.css'));
+/* Define all the routes here*/
+app.use("/css", express.static(__dirname+'/ui/css'));
+app.use("/img", express.static(__dirname+'/ui/img'));
+app.use("/js", express.static(__dirname+'/ui/js'));
+app.use("/fm_internet", express.static(__dirname+'/ui/fm_internet'));
+
+app.get('/', function (req, res) {
+    get_posts();
+    res.send(homeTemplate());
 });
 
-app.get('/ui/main.js', function (req, res) {
-  res.sendFile(path.join(__dirname, 'ui', 'main.js'));
+app.get('/posts', function (req, res) {
+    res.redirect('/');
 });
-app.get('/ui/pk.jpg', function (req, res) {
-  res.sendFile(path.join(__dirname, 'ui', 'pk.jpg'));
+
+app.get('/index.html', function (req, res) {
+    res.redirect('/');
 });
+
+app.get('/about', function (req, res) {
+    res.sendFile(path.join(__dirname, 'ui', 'about.html'));
+});
+
+app.get('/contact', function (req, res) {
+   res.sendFile(path.join(__dirname, 'ui', 'contact.html'));
+});
+
+app.get('/main.js', function (req, res) {
+   res.sendFile(path.join(__dirname, 'ui', 'main.js'));
+});
+
+app.get('/article.js', function (req, res) {
+   res.sendFile(path.join(__dirname, 'ui', 'article.js'));
+});
+
+app.get('/favicon.ico', function (req, res){
+    res.sendFile(path.join(__dirname, 'ui/img', 'favicon.ico'))
+});
+
 
 
 var port = 8080; // Use 8080 for local development because you might already have apache running on 80
