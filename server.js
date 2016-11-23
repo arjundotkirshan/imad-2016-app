@@ -1,10 +1,21 @@
+//Required Libraries
 var express = require('express');
 var morgan = require('morgan');
 var path = require('path');
-var Pool = require('pg').Pool;
 var crypto=require('crypto');
+var Pool = require('pg').Pool;
 var bodyParser=require('body-parser');
 var session=require('express-session');
+
+var app = express();
+app.use(morgan('combined'));
+app.use(bodyParser.json());
+app.use(session({
+    secret:'asfdd@waikiDuk@nrewqasfdd@waikiDuk@nrew',
+    cookie:{maxAge:1000*60*60*24*30}
+}));
+
+//database connection is defined here
 var config={
     user:'arjundotkirshan',
     database:'arjundotkirshan',
@@ -13,13 +24,8 @@ var config={
     password:process.env.DB_PASSWORD
 };
 
-var app = express();
-app.use(morgan('combined'));
-app.use(bodyParser.json());
-app.use(session({
-    secret:'SomeRandomSecretValue',
-    cookie:{maxAge:1000*60*60*24*30}
-}));
+
+
 
 function createTemplate (data){
     var title = data.title;
