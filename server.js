@@ -24,7 +24,7 @@ var config={
     password:process.env.IMADPASSWORD || process.env.DB_PASSWORD
 };
 
-/* All the global variables */
+/* All the global variables 
 var users = [];
 var comments = [];
 var posts = [];
@@ -34,7 +34,7 @@ var pool = new Pool(config);
 get_posts();
 get_comments();
 get_users();
-
+*/
 
 
 function createTemplate (data){
