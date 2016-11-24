@@ -1,176 +1,81 @@
-function escapeHtml(unsafe) {
-    return unsafe
-         .replace(/&/g, "&amp;")
-         .replace(/</g, "&lt;")
-         .replace(/>/g, "&gt;")
-         .replace(/"/g, "&quot;")
-         .replace(/'/g, "&#039;");
+var currentArticleTitle = window.location.pathname.split('/')[2];
+function loadCommentForm () {
+    var commentFormHtml = `
+        <h5>Submit a comment</h5>
+        <textarea id="comment_text" rows="5" cols="100" placeholder="Enter your comment here..."></textarea>
+        <br/>
+        <input type="submit" id="submit" value="Submit" />
+        <br/>
+        `;
+    document.getElementById('comment_form').innerHTML = commentFormHtml;
+    var submit = document.getElementById('submit');
+    submit.onclick = function () {
+        var request = new XMLHttpRequest();
+        request.onreadystatechange = function () {
+          if (request.readyState === XMLHttpRequest.DONE) {
+                if (request.status === 200) {
+                    document.getElementById('comment_text').value = '';
+                    loadComments();    
+                } else {
+                    alert('Error! Could not submit comment');
+                }
+                submit.value = 'Submit';
+          }
+        };
+        var comment = document.getElementById('comment_text').value;
+        request.open('POST', '/submit-comment/' + currentArticleTitle, true);
+        request.setRequestHeader('Content-Type', 'application/json');
+        request.send(JSON.stringify({comment: comment}));  
+        submit.value = 'Submitting...';
+    };
 }
 
-/*------------------------------- Article/Post Comment Submission ---------------------------------*/
-
-var submitComment = document.getElementById('submitComment');
-var post_id = window.location.pathname.replace('/posts/','');
-
-var commentAuthor;
-var commentContent;
-var date=new Date();
-
-
-
-/* Comment Submit endpoint
-   Function 1 - Bind enter key to Submit button click
-   Function 2 - Submit the comment on click
-   */
-   if (submitComment) {
-
-   	$(document).ready(function(){	
-   		$(document).bind('keypress', function(e) {
-   			if(e.keyCode==13 && !e.shiftKey){
-   				// e.preventDefault();
-   				commentContent = escapeHtml(document.getElementById('commentContent').value);
-   				if (commentContent === '') {
-   					$("#commentContent").attr("placeholder", "Comment is required !");
-   				} else {
-   				$('#submitComment').trigger('click');
-   			}
-   		}
-   		});
-   	});
-
-
-
-
-   	submitComment.onclick = function(){
-   		commentContent = escapeHtml(document.getElementById('commentContent').value);
-   		var date = new Date();
-   		console.log(date);
-
-   		if (commentContent === '') {
-   			$(document).bind('keypress', function(e) {
-	   			if(e.keyCode==13 && !e.shiftKey){
-	   				// e.preventDefault();
-	   			}
-   			});
-
-   			$("#commentContent").attr("placeholder", "Comment is required !");
-   		
-   		} else {
-   			var req2 = new XMLHttpRequest();
-   			req2.onreadystatechange = function(){
-   				if(req2.readyState === XMLHttpRequest.DONE) {
-   					if (req2.status === 400) {
-   						alert("You're not logged in!");	
-   					} else if (req2.status === 200) {
-
-   						commentAuthor = req2.responseText;
-   						
-   						var req3 = new XMLHttpRequest();
-
-						req3.onreadystatechange = function(){
-							if(req3.readyState === XMLHttpRequest.DONE) {
-			   					if (req3.status === 200) {
-			   						console.log(req3.responseText);
-			   						var new_comment = document.getElementById('new_comment');
-			   						$("#new_comment").removeAttr("style");
-			   						$("#commentContent").val("");
-			   						$('#commentdone').fadeIn();
-			   						setTimeout(function() {
-			   							$('#commentdone').fadeOut();
-			   						}, 1500);
-
-			   						new_comment.innerHTML = `
-			   							<div class="col-sm-8 col-sm-offset-2">
-			   								<div class="panel panel-white post panel-shadow">
-			   									<div class="post-heading">
-			   										<div class="pull-left image">
-			   											<img src="http://bootdey.com/img/Content/user_`+JSON.parse(req3.responseText).displaypic+`.jpg" class="img-circle avatar" alt="user profile image">
-			   										</div>
-				   									<div class="pull-left meta">
-				   										<div class="title h5">
-				   											<a href="/user/${commentAuthor}" id="author"><b>${commentAuthor}</b></a>
-				   										</div>
-				   										<h6 class="text-muted time">${date.toGMTString()}</h6>
-				   									</div> 
-				   									</div>
-				   									<div class="post-description"> 
-				   										<p>${commentContent}</p>
-				   									</div>
-				   								</div>
-				   							</div>
-			   						` + new_comment.innerHTML;
-			   					} else {
-			   						console.log(req3.status);
-			   						$('#commenterror').fadeIn();
-			   						setTimeout(function() {
-			   							$('#commenterror').fadeOut();
-			   						}, 1500);
-			   					}
-			   				}
-		   				}
-
-		   				req3.open("GET", window.location.protocol+"//"+window.location.host+"/getUser/"+commentAuthor, true);
-						req3.send(null);
-
-   					}
-   					document.getElementById('submitComment').innerHTML="Submit";
-   				}
-   			};
-			req2.open("GET", window.location.protocol+"//"+window.location.host+"/submit-comment/"+post_id+"?content="+escapeHtml(commentContent), true);
-			req2.send(null);	
-			document.getElementById('submitComment').innerHTML="Submitting..."	
-			}
-		}
-	}
-
-
-
-	/*------------------------------- Show comment box only if logged in ---------------------------------*/
-
-
-function setdisplaypic(username){
-		var req = new XMLHttpRequest();	
-		req.onreadystatechange = function(){
-			if(req.readyState === XMLHttpRequest.DONE){
-				if (req.status === 200){
-					$('#newdisplaypic').attr("src","http://bootdey.com/img/Content/user_"+JSON.parse(req.responseText).displaypic+".jpg");
-					console.log(JSON.parse(req.responseText).displaypic);
-				} 
-			}
-		};
-		
-		req.open("GET", window.location.protocol+"//"+window.location.host+"/getUser/"+username, true);
-		req.send(null);
-
-		// return 
+function loadLogin () {
+    var request = new XMLHttpRequest();
+    request.onreadystatechange = function () {
+        if (request.readyState === XMLHttpRequest.DONE) {
+            if (request.status === 200) {
+                loadCommentForm(this.responseText);
+            }
+        }
+    };
+    
+    request.open('GET', '/check-login', true);
+    request.send(null);
 }
-
-
-	function checklogin() {
-		var req = new XMLHttpRequest();	
-
-		req.onreadystatechange = function(){
-			if(req.readyState === XMLHttpRequest.DONE){
-				// Do something
-				if (req.status === 200){
-					$("#login-modal").modal("hide");
-					$('#asklogin').hide();
-					$('#commentbox').show();
-					$('#loginnavbar').hide();
-					$('#logoutnavbar').show();
-					setdisplaypic(req.responseText);
-					console.log('user logged in');
-				} else {
-					$('#logoutnavbar').hide();
-					$('#loginnavbar').show();
-					$('#asklogin').show();
-					$('#commentbox').hide();
-				}		
-			}
-		};
-
-		req.open("GET", window.location.protocol+"//"+window.location.host+"/check-login", true);
-		req.send(null);
-	}
-
-	$(document).ready(checklogin);
+function escapeHTML (text)
+{
+    var $text = document.createTextNode(text);
+    var $div = document.createElement('div');
+    $div.appendChild($text);
+    return $div.innerHTML;
+}
+function loadComments () {
+    var request = new XMLHttpRequest();
+    request.onreadystatechange = function () {
+        if (request.readyState === XMLHttpRequest.DONE) {
+            var comments = document.getElementById('comments');
+            if (request.status === 200) {
+                var content = '';
+                var commentsData = JSON.parse(this.responseText);
+                for (var i=0; i< commentsData.length; i++) {
+                    var time = new Date(commentsData[i].timestamp);
+                    content += `<div class="comment">
+                        <p>${escapeHTML(commentsData[i].comment)}</p>
+                        <div class="commenter">
+                            ${commentsData[i].username} - ${time.toLocaleTimeString()} on ${time.toLocaleDateString()} 
+                        </div>
+                    </div>`;
+                }
+                comments.innerHTML = content;
+            } else {
+                comments.innerHTML('Oops! Could not load comments!');
+            }
+        }
+    };
+    
+    request.open('GET', '/get-comments/' + currentArticleTitle, true);
+    request.send(null);
+}
+loadLogin();
+loadComments();
