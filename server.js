@@ -8,7 +8,7 @@ var bodyParser = require('body-parser');
 var session = require('express-session');
 
 var config = {
-    user: arjundotkirshan',
+    user: 'arjundotkirshan',
     database: 'arjundotkirshan',
     host: 'db.imad.hasura-app.io',
     port: '5432',
@@ -195,7 +195,7 @@ app.post('/submit-comment/:articleName', function (req, res) {
                             if (err) {
                                 res.status(500).send(err.toString());
                             } else {
-                                res.status(200).send('Comment inserted!')
+                                res.status(200).send('Comment inserted!');
                             }
                         });
                 }
