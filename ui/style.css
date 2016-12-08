@@ -1,0 +1,90 @@
+*{
+margin:0px;
+padding:0px;
+}
+
+body{
+background-color:#E9E6E6;
+ }
+ 
+#container{
+width:900px;
+margin:10px auto;
+background-color:#E1E0E0;
+border:1px groove #3D2E2E;
+border-radius:15px; 
+padding:5px;	
+}
+
+nav{
+background-color:#2DBBD3;;
+padding:5px;	
+}
+
+nav ul{
+list-style-type:none;/*for removing bullets*/
+}
+
+nav a{
+color:white;/*for link color white*/
+text-decoration:none;/*for removing underline*/
+}
+
+nav a:hover{
+color:red;	
+}
+
+nav li{
+display:inline;/*for keeping links horizontally*/
+padding:100px;/*for inserting space in-between*/
+}
+
+
+
+aside{
+width:200px;
+background-color:#2DBBD3;;
+border:1px solid white;
+float:left;/*the box will appear on left side*/
+padding:5px;
+color:white;
+}
+
+aside ul{
+list-style-type:none;	
+}
+
+aside a{
+ color:white;
+ text-decoration:none;
+}
+
+aside a:hover{
+color:red;	
+}
+
+aside li{
+padding:5px;
+ }
+ 
+ section{
+ width:auto;
+ }
+ 
+ article{
+	/*border:1px solid black;*/
+	width:200px;
+	height:auto;
+	float:left;
+	margin:5px;
+	padding:5px; 
+ }
+ 
+ footer{
+	clear:both;
+	background-color:#2DBBD3;
+	margin:5px;
+	text-align:center; 
+ }
+ 
+
