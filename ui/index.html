@@ -2,37 +2,58 @@
 <html>
     <head>
         <link href="/ui/style.css" rel="stylesheet" />
-     <!--   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.6.3/css/font-awesome.min.css">-->
+    
         <title>Node-Express Web App Development</title>
     </head>
-    <body background=/ui/bg.jpg>
+    <body>
+	<div id="container">
+	<!--Banner starts here-->
+	<header>
+    	<img src="img/banner.jpg" width="900" height="300" alt="Banner of this website" />
+    </header>
+    <!--Navigation starts here-->
+    <nav>
+    	<ul>
+        	<li><a href="index.html">Home</a></li>
+            <li><a href="downloads.html">Downloads</a></li>
+            <li><a href="contact_us.html">Contact Us</a></li>
+        </ul>
+    </nav>
+    
+    <!--Leftside starts here-->
+    <aside>
+    	<h2>Other Links</h2>
+        <ul>
+            <li><a href="index.html">Home</a></li>
+        	<li><a href="techcenter.html">Techcenter</a></li>
+            <li><a href="our_users.html">Our Users</a></li>
+        </ul>
+    </aside>
+    
+    <!--section and articles starts here-->
+    <section>
+    	<article><!--first article starts here-->
+        	<p>Once upon a time there was a king. Once upon a time there was a king. Once upon a time there was a king. Once upon a time there was a king.</p>
+            <p>Once upon a time there was a king. Once upon a time there was a king. Once upon a time there was a king. Once upon a time there was a king.</p>
+        </article>
         
-        <div class="container">
-            <div class="center">
-                <h1>Hi,This is pk</h1>
-                <h2>I'm studying <strong>MCA</strong> in <strong> <br>NIELIT B Level</strong></h2>
-            </div>
-            <div class="center">
-            <ul class="icons">
-							<li><a href="https://www.facebook.com/pravesh.sharma.new.delhi" target="_blank" title="Facebook" class="icon style2 fa-facebook"><span class="label">Facebook</span></a></li>
-							<li><a href="https://github.com/arjundotkirshan" target="_blank" title="Github" class="icon style2 fa-github"><span class="label">Github</span></a></li>
-						
-							<li><a href="mailto:arjun.kirshan@gmail.com" target="_blank" title="Email" class="icon style2 fa-envelope-o"><span class="label">Email</span></a></li>
-                            </ul></div>
-            <hr/>
-            <div style="width:100%;">
-            <div id="login_area" style="width:40%; float:left; padding-right: 20px; padding-left: 20px;">
-                <center><button id="login/register" class="button">Login/Register</button></center>
-            </div>
-            <h2>My Articles</h2>
-            <div id="articles" style="overflow:auto;">
-                <center>Loading articles...</center>
-            </div>
-            </div>
-            <div class="footer">
-            </div>
-            </div>
-        <script type="text/javascript" src="/ui/main.js">
-        </script>
-    </body>
+        <article><!--second article starts here-->
+        	<p>Once upon a time there was a king. Once upon a time there was a king. Once upon a time there was a king. Once upon a time there was a king.</p>
+            <p>Once upon a time there was a king. Once upon a time there was a king. Once upon a time there was a king. Once upon a time there was a king.</p>
+        </article>
+        
+        <article>
+        	<h2>Login</h2>
+            username:<input type="text" id="username" />
+            password:<input type="password" id="password" />
+            <button type="button" value="Submit" />
+        </article>
+    </section>
+    
+     
+    <footer>
+    	<p>Copyright &copy; Sharma Web Developers</p>
+    </footer>
+   </div>    
+</body>	
 </html>
