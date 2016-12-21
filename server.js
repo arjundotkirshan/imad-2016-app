@@ -7,11 +7,11 @@ var app=express();
 app.use(morgan('combined'));
 
 app.get('/', function(req, res){
-    res.sendfile(path.join(_dirname, 'ui', 'index.html'));
+    res.sendFile(path.join(_dirname, 'ui', 'index.html'));
 });
 
 app.get('/ui/style.css', function(req, res){
-    res.sendfile(path.join(_dirname, 'ui', 'style.css'));
+    res.sendFile(path.join(_dirname, 'ui', 'style.css'));
 });
 
 var port = 8080; // Use 8080 for local development because you might already have apache running on 80
