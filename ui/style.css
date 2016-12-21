@@ -47,26 +47,9 @@ background-color:#2DBBD3;;
 border:1px solid white;
 float:left;/*the box will appear on left side*/
 padding:5px;
-color:white;
+
 }
 
-aside ul{
-list-style-type:none;	
-}
-
-aside a{
- color:white;
- text-decoration:none;
-}
-
-aside a:hover{
-color:red;	
-}
-
-aside li{
-padding:5px;
- }
- 
  section{
  width:auto;
  }
