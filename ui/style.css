@@ -43,11 +43,10 @@ padding:100px;/*for inserting space in-between*/
 
 aside{
 width:200px;
-background-color:#2DBBD3;;
+background-color:#2DBBD3;
 border:1px solid white;
 float:left;/*the box will appear on left side*/
 padding:5px;
-
 }
 
  section{
