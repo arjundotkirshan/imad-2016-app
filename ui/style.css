@@ -49,10 +49,15 @@ float:left;/*the box will appear on left side*/
 padding:5px;
 }
 
+
  section{
  width:auto;
  float:left;
  }
+ 
+ section ul{
+list-style-type:none;/*for removing bullets*/
+}
  
  article{
 	border:1px solid black;
