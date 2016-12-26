@@ -56,12 +56,17 @@ float:left;
  }
 
  article{
-	border:1px solid blue;
+	border:1px solid grey;
 	width:220px;
 	height:auto;
 	float:left;
 	margin:5px;
 	padding:5px; 
+ }
+ 
+ article{
+	border:1px solid white;
+	
  }
  
  footer{
