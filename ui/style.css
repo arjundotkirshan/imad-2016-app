@@ -53,18 +53,17 @@ padding:5px;
  section{
  width:auto;
  float:left;
+ margin:5px;
  }
  
- section ul{
-list-style-type:none;/*for removing bullets*/
-}
+ 
  
  article{
 	border:1px solid black;
 	width:200px;
 	height:auto;
 	float:left;
-	margin:5px;
+	
 	padding:5px; 
  }
  
