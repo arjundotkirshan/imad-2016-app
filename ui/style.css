@@ -64,7 +64,7 @@ float:left;
 	padding:5px; 
  }
  
- article{
+ article:hover{
 	border:1px solid white;
 	
  }
